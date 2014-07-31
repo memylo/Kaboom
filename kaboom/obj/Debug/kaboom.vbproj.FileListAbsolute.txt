@@ -1,0 +1,10 @@
+C:\Users\MeMylo\Documents\GitHub\kaboom\kaboom\bin\Debug\kaboom.dll
+C:\Users\MeMylo\Documents\GitHub\kaboom\kaboom\bin\Debug\kaboom.pdb
+C:\Users\MeMylo\Documents\GitHub\kaboom\kaboom\bin\Debug\kaboom.xml
+C:\Users\MeMylo\Documents\GitHub\kaboom\kaboom\obj\Debug\kaboom.Resources.resources
+C:\Users\MeMylo\Documents\GitHub\kaboom\kaboom\obj\Debug\kaboom.vbproj.GenerateResource.Cache
+C:\Users\MeMylo\Documents\GitHub\kaboom\kaboom\obj\Debug\kaboom.dll
+C:\Users\MeMylo\Documents\GitHub\kaboom\kaboom\obj\Debug\kaboom.xml
+C:\Users\MeMylo\Documents\GitHub\kaboom\kaboom\obj\Debug\kaboom.pdb
+C:\Users\MeMylo\Documents\GitHub\kaboom\kaboom\obj\Debug\kaboom.vbprojResolveAssemblyReference.cache
+C:\Users\MeMylo\Documents\GitHub\kaboom\kaboom\bin\Debug\EEPhysics.dll
