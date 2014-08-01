@@ -233,7 +233,7 @@ Public Class kaboomArena
                     MainStoragePlatform.Set("kabom", "highscorePlayer", Player.Username)
                     Chatter.Chat(Player.Username & " broke the HS! [" & Score & "P]!")
                 End If
-                MainUploadService.UploadLabel(24, 79, LabelBlock.DecorationSign, "highscore: [" & Score & "P] by " & highscorePlayer)
+                MainUploadService.UploadLabel(24, 79, LabelBlock.DecorationSign, "highscore: [" & Score & "P] by " & Player.Username)
                 ResetArena()
         End Select
     End Function
