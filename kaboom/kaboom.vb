@@ -88,11 +88,6 @@ Public Class kaboom
         End If
     End Sub
     Private Sub WaitTick() Handles Wait.Elapsed
-        'UPDATE HIGHSCORESIGN JUST BCUZ
-        Dim highscore As Integer = StoragePlatform.Get("kabom", "highscore")
-        Dim highscorePlayer As String = StoragePlatform.Get("kabom", "highscorePlayer")
-        UploadService.UploadLabel(24, 79, LabelBlock.DecorationSign, "highscore: [" & highscore & "P] by " & highscorePlayer)
-
         'IF THERE IS A FREE ARENA
         For Each Arena In ArenaList
             If Arena.ArenaTimer.Enabled = False Then
@@ -126,11 +121,11 @@ Public Class kaboom
         'INIT UPLOADERS
         AddWriter(WorldID, "score1@trash-mail.com", "score")
         AddArena("kabom1", WorldID, "kabom1@trash-mail.com", "kabom", New Rectangle(10, 10, 20, 11))
-        'AddArena("kabom2", WorldID, "kabom2@trash-mail.com", "kabom", New Rectangle(40, 10, 20, 11))
-        'AddArena("kabom3", WorldID, "kabom3@trash-mail.com", "kabom", New Rectangle(70, 10, 20, 11))
-        'AddArena("kabom4", WorldID, "kabom4@trash-mail.com", "kabom", New Rectangle(100, 10, 20, 11))
-        'AddArena("kabom5", WorldID, "kabom5@trash-mail.com", "kabom", New Rectangle(130, 10, 20, 11))
-        ' AddArena("kabom6", WorldID, "kabom6@trash-mail.com", "kabom", New Rectangle(160, 10, 20, 11))
+        AddArena("kabom2", WorldID, "kabom2@trash-mail.com", "kabom", New Rectangle(40, 10, 20, 11))
+        AddArena("kabom3", WorldID, "kabom3@trash-mail.com", "kabom", New Rectangle(70, 10, 20, 11))
+        AddArena("kabom4", WorldID, "kabom4@trash-mail.com", "kabom", New Rectangle(100, 10, 20, 11))
+        AddArena("kabom5", WorldID, "kabom5@trash-mail.com", "kabom", New Rectangle(130, 10, 20, 11))
+        AddArena("kabom6", WorldID, "kabom6@trash-mail.com", "kabom", New Rectangle(160, 10, 20, 11))
         'AddUploader("moon2", WorldID, "email", "pw",New Rectangle(10, 40, 20, 11))
         'AddUploader("moon3", WorldID, "email", "pw",New Rectangle(40, 40, 20, 11))
         'AddUploader("moon4", WorldID, "email", "pw",New Rectangle(70, 40, 20, 11))

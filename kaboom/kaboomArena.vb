@@ -165,8 +165,8 @@ Public Class kaboomArena
             End If
         ElseIf Paused Then
             PauseTimeout -= 1
-            If PauseTimeout = 500 Then
-                Chatter.Reply(Player.Username, "Quickly, MOVE!")
+            If PauseTimeout = 200 Then
+                Chatter.Reply(Player.Username, "Show you are not afk (by moving) or you will get killed!")
             End If
             If PauseTimeout = 0 Then
                 MainChatter.Kill(Player.Username)
@@ -187,8 +187,9 @@ Public Class kaboomArena
         UploadService.UploadBlock(ArenaRectangle.X - 2, ArenaRectangle.Y - 1, Block.BasicYellow)
         BombPoint.X = ArenaRectangle.X + ArenaRectangle.Width / 2
         UploadService.UploadBlock(BombPoint.X, BombPoint.Y, Block.Special2)
+        MovePlatform()
         Paused = True
-        PauseTimeout = 1000
+        PauseTimeout = 500
         Stopped = False
     End Function
     Private Async Function UnPauseArena() As Task
@@ -231,7 +232,7 @@ Public Class kaboomArena
                     MainStoragePlatform.Set("kabom", "highscorePlayer", Player.Username)
                     Chatter.Chat(Player.Username & " broke the HS! [" & Score & "P]!")
                 End If
-                MainUploadService.UploadLabel(24, 79, LabelBlock.DecorationSign, "highscore: [" & highscore & "P] by " & highscorePlayer)
+                MainUploadService.UploadLabel(24, 79, LabelBlock.DecorationSign, "highscore: [" & Score & "P] by " & highscorePlayer)
                 ResetArena()
         End Select
     End Function
@@ -284,7 +285,6 @@ Public Class kaboomArena
         UploadService.UploadBlock(ArenaRectangle.X - 2, ArenaRectangle.Y + 1, Block.BasicYellow)
         UploadService.UploadBlock(ArenaRectangle.X - 2, ArenaRectangle.Y + 3, Block.BasicYellow)
         UploadService.UploadBlock(ArenaRectangle.X - 2, ArenaRectangle.Y + 5, Block.BasicYellow)
-
     End Function
     Private Async Function RevertBlocks() As Task
         For i As Integer = 0 To 5
