@@ -146,6 +146,7 @@ Public Class kaboomArena
     End Function
     Private Async Sub MovePlatform() Handles MoveTimer.Elapsed
         If Not Stopped And Not Paused Then
+            If Not IsAPlayerThere() Then Exit Sub
             Dim phyPlayer As PhysicsPlayer = PhysicsWorld.Players(Player.UserId)
             Dim pos As Point = New Point(phyPlayer.X / 16, phyPlayer.Y / 16)
             If pos.X > ArenaRectangle.X And pos.X < ArenaRectangle.X + ArenaRectangle.Width Then
