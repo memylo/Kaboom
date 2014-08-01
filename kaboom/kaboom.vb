@@ -17,7 +17,7 @@ Public Class kaboom
     Public WorldID As String = "PWmSQ3dUeya0I"
 
     Public ArenaList As New List(Of kaboomArena)
-    Public WithEvents Wait As System.Timers.Timer
+    Public WithEvents Wait As New System.Timers.Timer
     Public WaitingList As New List(Of Player)
     Public Writer As kaboomWriter
 
@@ -25,43 +25,33 @@ Public Class kaboom
 
     Protected Overloads Overrides Sub Enable()
         Events.Bind(Of JoinCompleteRoomEvent)(AddressOf JoinComplete)
-        Events.Bind(Of PlaceWorldEvent)(AddressOf PlaceWorld)
+        Events.Bind(Of MovePlayerEvent)(AddressOf MovePlayer)
     End Sub
-
     Private Sub JoinComplete(ByVal sender As Object, ByVal e As JoinCompleteRoomEvent)
         'ENABLE A WHOLE BUNCH OF SH**
-        Wait = GetTimer(50)
-        EnableUploaders()
-        Chatter.LoadLevel()
-        Wait.Start()
         Chatter.Name = "KABOM!"
         Chatter.Chat("ENABLED.")
-        Events.Bind(Of MovePlayerEvent)(AddressOf MovePlayer)
+        Chatter.LoadLevel()
+        EnableUploaders()
+        Wait = GetTimer(50)
+        Wait.Start()
         Enabled = True
     End Sub
-    Private Sub PlaceWorld(ByVal sender As Object, ByVal e As PlaceWorldEvent)
-        'INVISIBLE BLOCKS JUST BCUZ
-        If e.WorldBlock.Block = Block.BetaYellow Then
-            UploadService.UploadBlock(e.WorldBlock.X, e.WorldBlock.Y, 161)
-        ElseIf e.WorldBlock.Block = Block.BetaBlue Then
-            UploadService.UploadBlock(e.WorldBlock.X, e.WorldBlock.Y, 136)
-        End If
-    End Sub
     Private Sub MovePlayer(ByVal sender As Object, ByVal e As MovePlayerEvent)
-        Dim pos As Point = New Point(e.InnerEvent.BlockX, e.InnerEvent.BlockY)
-        Dim modi As Point = New Point(e.InnerEvent.ModifierX, e.InnerEvent.ModifierY)
-
-        'LET USER THA GAME JOIN
-        If e.InnerEvent.SpeedY = -52 Then
-            If WorldService(Layer.Foreground, pos.X, pos.Y + 1).Block = Block.BrickDarkGreen Then
-                JoinAGame(e.Player)
+        If Enabled Then
+            Dim pos As Point = New Point(e.InnerEvent.BlockX, e.InnerEvent.BlockY)
+            Dim modi As Point = New Point(e.InnerEvent.ModifierX, e.InnerEvent.ModifierY)
+            'LET USER THA GAME JOIN
+            If e.InnerEvent.SpeedY = -52 Then
+                If WorldService(Layer.Foreground, pos.X, pos.Y + 1).Block = Block.BrickDarkGreen Then
+                    JoinAGame(e.Player)
+                End If
             End If
-        End If
-
-        'GIVE USER PERSONAL STATS
-        If WorldService(Layer.Background, pos.X, pos.Y).Block = Block.BgSpartaGreen Then
-            Dim highscore As Integer = StoragePlatform.Get("kabom", e.Player.Username & "highscore")
-            UploadService.UploadLabel(pos.X, pos.Y, LabelBlock.DecorationSign, e.Player.Username & "'s highscore: [" & highscore & "P]")
+            'GIVE USER PERSONAL STATS
+            If WorldService(Layer.Background, pos.X, pos.Y).Block = Block.BgSpartaGreen Then
+                Dim highscore As Integer = StoragePlatform.Get("kabom", e.Player.Username & "highscore")
+                UploadService.UploadLabel(pos.X, pos.Y, LabelBlock.DecorationSign, e.Player.Username & "'s highscore: [" & highscore & "P]")
+            End If
         End If
     End Sub
     Public Sub JoinAGame(player As Player, Optional disableTP As Boolean = False)
@@ -136,11 +126,11 @@ Public Class kaboom
         'INIT UPLOADERS
         AddWriter(WorldID, "score1@trash-mail.com", "score")
         AddArena("kabom1", WorldID, "kabom1@trash-mail.com", "kabom", New Rectangle(10, 10, 20, 11))
-        AddArena("kabom2", WorldID, "kabom2@trash-mail.com", "kabom", New Rectangle(40, 10, 20, 11))
-        AddArena("kabom3", WorldID, "kabom3@trash-mail.com", "kabom", New Rectangle(70, 10, 20, 11))
-        AddArena("kabom4", WorldID, "kabom4@trash-mail.com", "kabom", New Rectangle(100, 10, 20, 11))
-        AddArena("kabom5", WorldID, "kabom5@trash-mail.com", "kabom", New Rectangle(130, 10, 20, 11))
-        AddArena("kabom6", WorldID, "kabom6@trash-mail.com", "kabom", New Rectangle(160, 10, 20, 11))
+        'AddArena("kabom2", WorldID, "kabom2@trash-mail.com", "kabom", New Rectangle(40, 10, 20, 11))
+        'AddArena("kabom3", WorldID, "kabom3@trash-mail.com", "kabom", New Rectangle(70, 10, 20, 11))
+        'AddArena("kabom4", WorldID, "kabom4@trash-mail.com", "kabom", New Rectangle(100, 10, 20, 11))
+        'AddArena("kabom5", WorldID, "kabom5@trash-mail.com", "kabom", New Rectangle(130, 10, 20, 11))
+        ' AddArena("kabom6", WorldID, "kabom6@trash-mail.com", "kabom", New Rectangle(160, 10, 20, 11))
         'AddUploader("moon2", WorldID, "email", "pw",New Rectangle(10, 40, 20, 11))
         'AddUploader("moon3", WorldID, "email", "pw",New Rectangle(40, 40, 20, 11))
         'AddUploader("moon4", WorldID, "email", "pw",New Rectangle(70, 40, 20, 11))
